@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 export class Home extends React.Component {
     render() {
         return (
-            <div className='tmp-auth tmp-page__auth' >
+            <div className='tmp-home tmp-page__home' >
                 <h1>Home</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget tellus faucibus, scelerisque lorem nec, interdum nunc. In dignissim vehicula risus, quis porta lorem gravida vel.
                    Proin vehicula quam ex, sit amet ultricies magna sodales a.
