@@ -43,12 +43,12 @@ module.exports = {
         rules: [
             {
                 enforce: "pre",
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /(node_modules|bower_components)/,
                 loader: "eslint-loader"
             },
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: [/node_modules/],
                 use:
                     {
@@ -57,7 +57,6 @@ module.exports = {
                             presets: ['es2015', 'react', 'stage-2']
                         }
                     }
-
             },
             {
                 test: /\.css$/,

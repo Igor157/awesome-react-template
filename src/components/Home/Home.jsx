@@ -6,7 +6,9 @@ export class Home extends React.Component {
         return (
             <div className='tmp-home tmp-page__home' >
                 <h1>Home</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget tellus faucibus, scelerisque lorem nec, interdum nunc. In dignissim vehicula risus, quis porta lorem gravida vel.
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Pellentesque eget tellus faucibus, scelerisque lorem nec, interdum nunc.
+                     In dignissim vehicula risus, quis porta lorem gravida vel.
                    Proin vehicula quam ex, sit amet ultricies magna sodales a.
                    Aenean varius tincidunt eros. Integer auctor neque sed elit mollis ultricies.
                    Mauris aliquam hendrerit dui a consequat.
@@ -19,3 +21,5 @@ export class Home extends React.Component {
         );
     }
 }
+
+export default Home;

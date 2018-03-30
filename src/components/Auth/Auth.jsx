@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-export class Auth extends React.Component {
+class Auth extends React.Component {
     render() {
         return (
             <div className='tmp-auth tmp-page__auth' >
@@ -21,3 +21,5 @@ export class Auth extends React.Component {
         );
     }
 }
+
+export default Auth;

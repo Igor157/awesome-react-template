@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-export class About extends React.Component {
+class About extends React.Component {
     render() {
         return (
             <div className='tmp-about tmp-page__about' >
                 <h1>Lorem Ipsum</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget tellus faucibus, scelerisque lorem nec, interdum nunc. In dignissim vehicula risus, quis porta lorem gravida vel.
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Pellentesque eget tellus faucibus, scelerisque lorem nec, interdum nunc.
+                    In dignissim vehicula risus, quis porta lorem gravida vel.
                    Proin vehicula quam ex, sit amet ultricies magna sodales a.
                    Aenean varius tincidunt eros. Integer auctor neque sed elit mollis ultricies.
                    Mauris aliquam hendrerit dui a consequat.
@@ -19,3 +21,5 @@ export class About extends React.Component {
         );
     }
 }
+
+export default About;
