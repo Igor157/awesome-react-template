@@ -22,25 +22,25 @@ function LoadingComponent(props) {
     }
 }
 const About = Loadable({
-    loader: () => import('./components/About/About.jsx'),
+    loader: () => import('./components/about/about.component.jsx'),
     loading: LoadingComponent,
     delay: 200,
     timeout: 10000,
 });
 const Auth = Loadable({
-    loader: () => import('./components/Auth/Auth.jsx'),
+    loader: () => import('./components/auth/auth.component.jsx'),
     loading: LoadingComponent,
     delay: 200,
     timeout: 10000,
 });
 const Home = Loadable({
-    loader: () => import('./components/Home/Home.jsx'),
+    loader: () => import('./components/home/home.component.jsx'),
     loading: LoadingComponent,
     delay: 200,
     timeout: 10000,
 });
 const Navigation = Loadable({
-    loader: () => import('./components/Navigation/Navigation.jsx'),
+    loader: () => import('./components/navigation/navigation.component.jsx'),
     loading: LoadingComponent,
     delay: 200,
     timeout: 10000,
