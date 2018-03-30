@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import './default.scss';
@@ -9,6 +8,17 @@ import {
     Switch
 } from 'react-router-dom';
 import Loadable from 'react-loadable';
+import Auth from './components/auth/auth.component.js';
+import AuthPage from './components/auth-page/auth-page.component.jsx';
+import Callback from './components/Callback/Callback';
+
+
+const auth = new Auth();
+const handleAuthentication = ({ location }) => {
+    if (/access_token|id_token|error/.test(location.hash)) {
+        auth.handleAuthentication();
+    }
+};
 
 function LoadingComponent(props) {
     if (props.error) {
@@ -25,69 +35,62 @@ const About = Loadable({
     loader: () => import('./components/about/about.component.jsx'),
     loading: LoadingComponent,
     delay: 200,
-    timeout: 10000,
-});
-const Auth = Loadable({
-    loader: () => import('./components/auth/auth.component.jsx'),
-    loading: LoadingComponent,
-    delay: 200,
-    timeout: 10000,
+    timeout: 10000
 });
 const Home = Loadable({
     loader: () => import('./components/home/home.component.jsx'),
     loading: LoadingComponent,
     delay: 200,
-    timeout: 10000,
+    timeout: 10000
 });
 const Navigation = Loadable({
     loader: () => import('./components/navigation/navigation.component.jsx'),
     loading: LoadingComponent,
     delay: 200,
-    timeout: 10000,
+    timeout: 10000
 });
 
 class Routes extends React.Component {
     render() {
         return (
-            <Route
-                path='/'
-                render={() =>
-                    <div className="tmp-page">
-                        <Switch>
-                            <Route
-                                path='/'
-                                render={() => <Navigation />}
-                            />
-                            <Route
-                                path='/about'
-                                render={() => <Navigation />}
-                            />
-                            <Route
-                                path='/home'
-                                render={() => <Navigation />}
-                            />
-                        </Switch>
-                        <Switch>
-                            <Route
-                                exact path='/about'
-                                render={() => <About />}
-                            />
-                        </Switch>
-                        <Switch>
-                            <Route
-                                path='/home'
-                                render={() => <Home />}
-                            />
-                        </Switch>
-                        <Switch>
-                            <Route
-                                path='/auth'
-                                render={() => <Auth />}
-                            />
-                        </Switch>
-                    </div>
-                }
-            />
+            <div className="tmp-page">
+                <Route
+                    exact path='/'
+                    render={(props) => <AuthPage auth={auth} {...props} />}
+                />
+                <Route path="/callback" render={(props) => {
+                    handleAuthentication(props);
+                    return <Callback {...props} />;
+                }} />
+                <Switch>
+                    <Route
+                        path='/about'
+                        render={() => <Navigation />}
+                    />
+                    <Route
+                        path='/home'
+                        render={() => <Navigation />}
+                    />
+                </Switch>
+                <Switch>
+                    <Route
+                        exact path='/about'
+                        render={() => <About />}
+                    />
+                </Switch>
+                <Switch>
+                    <Route
+                        path='/home'
+                        render={() => <Home />}
+                    />
+                </Switch>
+                <Switch>
+                    <Route
+                        path='/auth'
+                        render={() => <Auth />}
+                    />
+                </Switch>
+            </div>
         );
     }
 }

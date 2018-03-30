@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import Routes from './routes.component.jsx';
 import configureStore from './store/configureStore.js';
+import history from './history';
 
 import {
-    BrowserRouter as Router,
+    Router,
     Route,
     NavLink,
     Switch
@@ -14,7 +15,7 @@ import {
 let store = configureStore({});
 ReactDOM.render(
     <Provider store={store}>
-        <Router>
+        <Router history={history}>
             <Routes />
         </Router>
     </Provider>,
