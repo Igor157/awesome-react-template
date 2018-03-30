@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import './default.scss';
@@ -7,12 +8,43 @@ import {
     NavLink,
     Switch
 } from 'react-router-dom';
+import Loadable from 'react-loadable';
 
-import About from './components/About/About.jsx';
-import Auth from './components/Auth/Auth.jsx';
-import Home from './components/Home/Home.jsx';
-import Navigation from './components/Navigation/Navigation.jsx';
-
+function LoadingComponent(props) {
+    if (props.error) {
+        return <div>Error!</div>;
+    } else if (props.timedOut) {
+        return <div>Taking a long time...</div>;
+    } else if (props.pastDelay) {
+        return <div>Loading...</div>;
+    } else {
+        return null;
+    }
+}
+const About = Loadable({
+    loader: () => import('./components/About/About.jsx'),
+    loading: LoadingComponent,
+    delay: 200,
+    timeout: 10000,
+});
+const Auth = Loadable({
+    loader: () => import('./components/Auth/Auth.jsx'),
+    loading: LoadingComponent,
+    delay: 200,
+    timeout: 10000,
+});
+const Home = Loadable({
+    loader: () => import('./components/Home/Home.jsx'),
+    loading: LoadingComponent,
+    delay: 200,
+    timeout: 10000,
+});
+const Navigation = Loadable({
+    loader: () => import('./components/Navigation/Navigation.jsx'),
+    loading: LoadingComponent,
+    delay: 200,
+    timeout: 10000,
+});
 
 class Routes extends React.Component {
     render() {
@@ -23,7 +55,7 @@ class Routes extends React.Component {
                     <div className="tmp-page">
                         <Switch>
                             <Route
-                                exact path='/'
+                                path='/'
                                 render={() => <Navigation />}
                             />
                             <Route

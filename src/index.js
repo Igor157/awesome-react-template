@@ -14,14 +14,11 @@ import {
 
 let store = configureStore({});
 ReactDOM.render(
-    // <Provider store={store}>
-    //     <Router>
-    //         <Routes />
-    //     </Router>
-    // </Provider>,
-    <Router>
-        <Routes />
-    </Router>,
+    <Provider store={store}>
+        <Router>
+            <Routes />
+        </Router>
+    </Provider>,
     document.getElementById('tmp-page')
 );
 

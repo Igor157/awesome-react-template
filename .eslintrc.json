@@ -17,6 +17,7 @@
         "node": true,
         "jest/globals": true
     },
+    "parser": "babel-eslint",
     "rules": {
         "comma-dangle": [
             2,
