@@ -5,7 +5,8 @@ const common = require('./webpack.common.js');
 module.exports = merge(common, {
     devtool: 'source-map',
     devServer: {
-        contentBase: './build'
+        contentBase: './build',
+        historyApiFallback: true
     },
     plugins: [
         new webpack.DefinePlugin({

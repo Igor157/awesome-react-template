@@ -23,7 +23,8 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: '[name].[chunkhash].js'
+        filename: '[name].[chunkhash].js',
+        publicPath: '/'
     },
     plugins: [
         new CleanWebpackPlugin(['build']),

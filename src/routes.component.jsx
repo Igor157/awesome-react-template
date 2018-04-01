@@ -8,10 +8,8 @@ import {
     Switch
 } from 'react-router-dom';
 import Loadable from 'react-loadable';
-import Auth from './components/auth/auth.component.js';
-import AuthPage from './components/auth-page/auth-page.component.jsx';
+import Auth from './components/auth/authService.js';
 import Callback from './components/Callback/Callback';
-
 
 const auth = new Auth();
 const handleAuthentication = ({ location }) => {
@@ -43,8 +41,8 @@ const Home = Loadable({
     delay: 200,
     timeout: 10000
 });
-const Navigation = Loadable({
-    loader: () => import('./components/navigation/navigation.component.jsx'),
+const Header = Loadable({
+    loader: () => import('./components/header/header.component.jsx'),
     loading: LoadingComponent,
     delay: 200,
     timeout: 10000
@@ -54,10 +52,10 @@ class Routes extends React.Component {
     render() {
         return (
             <div className="tmp-page">
-                <Route
+                {/* <Route
                     exact path='/'
                     render={(props) => <AuthPage auth={auth} {...props} />}
-                />
+                /> */}
                 <Route path="/callback" render={(props) => {
                     handleAuthentication(props);
                     return <Callback {...props} />;
@@ -65,31 +63,22 @@ class Routes extends React.Component {
                 <Switch>
                     <Route
                         path='/about'
-                        render={() => <Navigation />}
+                        render={(props) => <Header auth={auth} {...props} />}
                     />
                     <Route
                         path='/home'
-                        render={() => <Navigation />}
+                        render={(props) => <Header auth={auth} {...props} />}
                     />
                 </Switch>
-                <Switch>
-                    <Route
-                        exact path='/about'
-                        render={() => <About />}
-                    />
-                </Switch>
-                <Switch>
-                    <Route
-                        path='/home'
-                        render={() => <Home />}
-                    />
-                </Switch>
-                <Switch>
-                    <Route
-                        path='/auth'
-                        render={() => <Auth />}
-                    />
-                </Switch>
+                <Route
+                    exact path='/about'
+                    render={() => <About />}
+                />
+                <Route
+                    path='/home'
+                    render={() => <Home />}
+                />
+
             </div>
         );
     }
