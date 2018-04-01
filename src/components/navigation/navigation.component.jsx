@@ -14,6 +14,9 @@ class Navigation extends React.Component {
                     <li>
                         <Link to="/about">About</Link>
                     </li>
+                    <li>
+                        <Link to="/profile">Profile</Link>
+                    </li>
                 </ul>
             </nav>
         );

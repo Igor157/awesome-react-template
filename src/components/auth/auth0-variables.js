@@ -1,5 +1,5 @@
 export const AUTH_CONFIG = {
-  domain: 'awesome-react-temp.com',
-  clientId: '5abe24390063ce4e96690c7d',
-  callbackUrl: 'http://localhost:3000/callback'
+  domain: 'igor-kazakov.eu.auth0.com',
+  clientId: 'ncQ6F8wwZIPMXhO4Ymi0ZbkGDyASS40E',
+  callbackUrl: 'http://localhost:8080/callback'
 };

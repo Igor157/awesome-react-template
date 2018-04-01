@@ -47,6 +47,12 @@ const Header = Loadable({
     delay: 200,
     timeout: 10000
 });
+const Profile = Loadable({
+    loader: () => import('./components/profile/profile.component.jsx'),
+    loading: LoadingComponent,
+    delay: 200,
+    timeout: 10000
+});
 
 class Routes extends React.Component {
     render() {
@@ -69,6 +75,10 @@ class Routes extends React.Component {
                         path='/home'
                         render={(props) => <Header auth={auth} {...props} />}
                     />
+                    <Route
+                        path='/profile'
+                        render={(props) => <Header auth={auth} {...props} />}
+                    />
                 </Switch>
                 <Route
                     exact path='/about'
@@ -77,6 +87,10 @@ class Routes extends React.Component {
                 <Route
                     path='/home'
                     render={() => <Home />}
+                />
+                <Route
+                    path='/profile'
+                    render={(props) => <Profile auth={auth} {...props} />}
                 />
 
             </div>

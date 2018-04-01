@@ -3,36 +3,27 @@ import { Button } from 'react-bootstrap';
 import Navigation from '../navigation/navigation.component.jsx';
 import './header.style.css';
 
-class AuthPage extends Component {
-    goTo(route) {
-        this.props.history.replace(`/${route}`);
-    }
-
+class Header extends Component {
     login() {
         this.props.auth.login();
     }
-
     logout() {
         this.props.auth.logout();
     }
-
     render() {
         const { isAuthenticated } = this.props.auth;
-
         return (
-            <div>
+            <div className='tmp-header tmp-page__header'>
                 <Navigation />
-                <li>
-                    {
-                        isAuthenticated() ?
-                            <button className="btn btn-danger log" onClick={() => this.logout()}>Log out </button>
-                            : <button className="btn btn-info log" onClick={() => this.login()}>Log In</button>
-                    }
-                </li>
+                {
+                    isAuthenticated() ?
+                        <button className="header__log-out" onClick={() => this.logout()}>Log out </button>
+                        : <button className="header__log-in" onClick={() => this.login()}>Log In</button>
+                }
             </div >
         );
     }
 }
 
-export default AuthPage;
+export default Header;
 
