@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import Routes from './routes.component.jsx';
+import ErrorBoundary from './error-boundary.component.jsx';
 import configureStore from './store/configureStore.js';
+import history from './history';
 
 import {
-    BrowserRouter as Router,
+    Router,
     Route,
     NavLink,
     Switch
@@ -14,8 +16,10 @@ import {
 let store = configureStore({});
 ReactDOM.render(
     <Provider store={store}>
-        <Router>
-            <Routes />
+        <Router history={history}>
+            <ErrorBoundary>
+                <Routes />
+            </ErrorBoundary>
         </Router>
     </Provider>,
     document.getElementById('tmp-page')

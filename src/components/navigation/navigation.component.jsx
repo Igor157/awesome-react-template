@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import { login, logout, isLoggedIn } from '../utils/AuthService';
-// import '../App.css';
+
 
 class Navigation extends React.Component {
 
@@ -15,21 +14,9 @@ class Navigation extends React.Component {
                     <li>
                         <Link to="/about">About</Link>
                     </li>
-                    {/* <li>
-                        {
-                            (isLoggedIn()) ? <Link to="/special">Celebrity Jokes</Link> : ''
-                        }
-
-                    </li>
-                </ul>
-                <ul className="nav navbar-nav navbar-right">
                     <li>
-                        {
-                            (isLoggedIn()) ?
-                                <button className="btn btn-danger log" onClick={() => logout()}>Log out </button>
-                                : (<button className="btn btn-info log" onClick={() => login()}>Log In</button>)
-                        }
-                    </li> */}
+                        <Link to="/profile">Profile</Link>
+                    </li>
                 </ul>
             </nav>
         );

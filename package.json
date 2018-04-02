@@ -35,6 +35,7 @@
   },
   "homepage": "https://github.com/Igor157/awesome-react-template#readme",
   "dependencies": {
+    "auth0-js": "^9.4.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-loadable": "^5.3.1",
@@ -67,6 +68,7 @@
     "identity-obj-proxy": "^3.0.0",
     "image-webpack-loader": "^4.2.0",
     "node-sass": "^4.8.3",
+    "react-bootstrap": "^0.32.1",
     "redux-devtools": "^3.4.1",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
