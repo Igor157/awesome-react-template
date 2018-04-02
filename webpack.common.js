@@ -19,7 +19,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
     context: path.resolve(__dirname, "./src"),
     entry: {
-        app: './index.js'
+        app: './index.js',
+        auth: '.././node_modules/auth0-js/build/auth0.js'
     },
     output: {
         path: path.resolve(__dirname, 'build'),

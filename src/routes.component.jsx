@@ -10,6 +10,7 @@ import {
 import Loadable from 'react-loadable';
 import Auth from './components/auth/authService.js';
 import Callback from './components/Callback/Callback';
+import LoginPage from './components/login-page/login-page.component.jsx';
 
 const auth = new Auth();
 const handleAuthentication = ({ location }) => {
@@ -58,10 +59,10 @@ class Routes extends React.Component {
     render() {
         return (
             <div className="tmp-page">
-                {/* <Route
+                <Route
                     exact path='/'
-                    render={(props) => <AuthPage auth={auth} {...props} />}
-                /> */}
+                    render={(props) => <LoginPage login={auth.login()}/>}
+                />
                 <Route path="/callback" render={(props) => {
                     handleAuthentication(props);
                     return <Callback {...props} />;
