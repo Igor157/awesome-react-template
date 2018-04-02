@@ -3,12 +3,14 @@ import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import persistState from 'redux-localstorage';
-import {aboutReducer} from './About/about.reducer';
-import {authReducer} from './Auth/auth.reducer';
+import {aboutReducer} from './about/about.reducer';
+import {authReducer} from './auth/auth.reducer';
+import {headerReducer} from './header/header.reducer';
 
 export const allReducers = combineReducers({
     aboutReducer,
-    authReducer
+    authReducer,
+    headerReducer
 });
 
 export default function configureStore(initialState) {

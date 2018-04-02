@@ -10,6 +10,16 @@ class Header extends Component {
     logout() {
         this.props.auth.logout();
     }
+    componentDidMount() {
+        const { userProfile, getProfile } = this.props.auth;
+        if (!userProfile) {
+            getProfile((err, profile) => {
+                this.props.getUserInfo(profile);
+            });
+        } else {
+            this.props.getUserInfo(userProfile);
+        }
+    }
     render() {
         const { isAuthenticated } = this.props.auth;
         return (
