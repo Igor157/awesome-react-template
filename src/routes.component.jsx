@@ -42,8 +42,8 @@ const Home = Loadable({
     delay: 200,
     timeout: 10000
 });
-const Header = Loadable({
-    loader: () => import('./components/header/header.component.jsx'),
+const ConnectedHeader = Loadable({
+    loader: () => import('./store/header/header.container.jsx'),
     loading: LoadingComponent,
     delay: 200,
     timeout: 10000
@@ -70,15 +70,15 @@ class Routes extends React.Component {
                 <Switch>
                     <Route
                         path='/about'
-                        render={(props) => <Header auth={auth} {...props} />}
+                        render={(props) => <ConnectedHeader auth={auth} {...props} />}
                     />
                     <Route
                         path='/home'
-                        render={(props) => <Header auth={auth} {...props} />}
+                        render={(props) => <ConnectedHeader auth={auth} {...props} />}
                     />
                     <Route
                         path='/profile'
-                        render={(props) => <Header auth={auth} {...props} />}
+                        render={(props) => <ConnectedHeader auth={auth} {...props} />}
                     />
                 </Switch>
                 <Route
