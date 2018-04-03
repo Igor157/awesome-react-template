@@ -2,12 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 export class LoginPage extends React.Component {
-    componentDidMount() {
-        this.props.login();
-    }
     render() {
         return (
-            <div>
+            <div id='tmp-login' className = 'tmp-login tmp-page__login'>
             </div>
         );
     }

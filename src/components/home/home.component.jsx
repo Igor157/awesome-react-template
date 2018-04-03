@@ -17,6 +17,7 @@ export class Home extends React.Component {
                    Vivamus massa urna, luctus tempor libero ut, pulvinar imperdiet purus.
                    Ut cursus velit a dolor imperdiet tempor. Quisque turpis tortor, dictum in elit sed, bibendum venenatis lacus.
                 </p>
+                <div id='tmp-login'></div>
             </div>
         );
     }

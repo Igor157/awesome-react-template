@@ -36,6 +36,7 @@
   "homepage": "https://github.com/Igor157/awesome-react-template#readme",
   "dependencies": {
     "auth0-js": "^9.4.2",
+    "auth0-lock": "^11.5.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-loadable": "^5.3.1",

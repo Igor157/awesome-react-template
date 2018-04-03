@@ -6,3 +6,11 @@ export function getUserInfo(userInfo) {
         }
     };
 }
+export function startAuth(started) {
+    return {
+        type: 'START_AUTH',
+        payload: {
+            startAuth: !started
+        }
+    };
+}

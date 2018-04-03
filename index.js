@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Routes } from './Routes.jsx';
+import { ConnectedRoutes } from './Routes.jsx';
 import configureStore from './store/configureStore.js';
 import About from './components/About/About.jsx';
 
@@ -13,12 +13,12 @@ import {
 } from 'react-router-dom';
 
 let store = configureStore({
-    getCurrencies: { cur: [] }
+    headerReducer: { startAuth: false }
 });
 ReactDOM.render(
     <Provider store={store}>
         <Router>
-            <Routes />
+            <ConnectedRoutes />
         </Router>
     </Provider>,
     document.getElementById('tmp-page')

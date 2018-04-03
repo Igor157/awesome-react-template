@@ -5,19 +5,17 @@ import ReactDOM from 'react-dom';
 import {
     Route,
     NavLink,
-    Switch
+    Switch,
+    Redirect
 } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Loadable from 'react-loadable';
 import Auth from './components/auth/authService.js';
 import Callback from './components/Callback/Callback';
 import LoginPage from './components/login-page/login-page.component.jsx';
+import lock from './components/auth/authService';
+import './normalize.css';
 
-const auth = new Auth();
-const handleAuthentication = ({ location }) => {
-    if (/access_token|id_token|error/.test(location.hash)) {
-        auth.handleAuthentication();
-    }
-};
 
 function LoadingComponent(props) {
     if (props.error) {
@@ -57,46 +55,50 @@ const Profile = Loadable({
 
 class Routes extends React.Component {
     render() {
+        let startAuth = this.props.startAuth;
+        console.log(startAuth);
         return (
             <div className="tmp-page">
                 <Route
-                    exact path='/'
-                    render={(props) => <LoginPage login={auth.login()}/>}
+                    path='/'
+                    render={(props) => <ConnectedHeader auth={lock} {...props} />}
                 />
-                <Route path="/callback" render={(props) => {
-                    handleAuthentication(props);
-                    return <Callback {...props} />;
-                }} />
-                <Switch>
-                    <Route
-                        path='/about'
-                        render={(props) => <ConnectedHeader auth={auth} {...props} />}
-                    />
-                    <Route
-                        path='/home'
-                        render={(props) => <ConnectedHeader auth={auth} {...props} />}
-                    />
-                    <Route
-                        path='/profile'
-                        render={(props) => <ConnectedHeader auth={auth} {...props} />}
-                    />
-                </Switch>
+                <Route
+                    exact path='/'
+                    render={() =>
+                        startAuth ? <Redirect to="/login" />
+                            : <Home />
+                    }
+
+                />
                 <Route
                     exact path='/about'
                     render={() => <About />}
                 />
                 <Route
-                    path='/home'
-                    render={() => <Home />}
-                />
-                <Route
                     path='/profile'
-                    render={(props) => <Profile auth={auth} {...props} />}
+                    render={(props) => <Profile auth={lock} {...props} />}
                 />
-
+                {/* <Route path="/callback" render={(props) => {
+                    return <Callback {...props} />;
+                }} /> */}
+                <Route
+                    path='/login'
+                    render={(props) => <LoginPage auth={lock} {...props} />}
+                />
             </div>
         );
     }
 }
 
-export default Routes;
+const mapStateToProps = (state) => {
+    return {
+        startAuth: state.headerReducer.startAuth
+    };
+};
+const ConnectedRoutes = connect(
+    mapStateToProps
+)(Routes);
+
+export default ConnectedRoutes;
+
