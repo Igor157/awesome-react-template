@@ -10,11 +10,22 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Loadable from 'react-loadable';
-import Auth from './components/auth/authService.js';
+// import Auth from './components/auth/authService.js';
 import Callback from './components/Callback/Callback';
 import LoginPage from './components/login-page/login-page.component.jsx';
-import lock from './components/auth/authService';
+import {
+    lock,
+    isAuthenticated,
+    logout,
+    login
+} from './components/auth/authService';
 import './normalize.css';
+// let showAuth;
+// lock.on("show", () => {
+//     showAuth = true;
+//     console.log('!!!!!!!!!!!!!!!!!!!!!!!!!');
+// }
+// );
 
 
 function LoadingComponent(props) {
@@ -46,6 +57,12 @@ const ConnectedHeader = Loadable({
     delay: 200,
     timeout: 10000
 });
+const Navigation = Loadable({
+    loader: () => import('./components/navigation/navigation.component.jsx'),
+    loading: LoadingComponent,
+    delay: 200,
+    timeout: 10000
+});
 const Profile = Loadable({
     loader: () => import('./components/profile/profile.component.jsx'),
     loading: LoadingComponent,
@@ -56,36 +73,65 @@ const Profile = Loadable({
 class Routes extends React.Component {
     render() {
         let startAuth = this.props.startAuth;
-        console.log(startAuth);
         return (
             <div className="tmp-page">
-                <Route
-                    path='/'
-                    render={(props) => <ConnectedHeader auth={lock} {...props} />}
-                />
+                <Switch>
+                    {/* <Route
+                        path='/login'
+                        render={(props) => <Navigation
+                            auth={lock}
+                            isAuthenticated={isAuthenticated}
+                            logout={logout}
+                            {...props}
+                        />}
+                    /> */}
+                    <Route
+                        path='/'
+                        render={(props) => <ConnectedHeader
+                            auth={lock}
+                            isAuthenticated={isAuthenticated}
+                            login={login}
+                            logout={logout}
+                            {...props}
+                        />}
+                    />
+                </Switch>
                 <Route
                     exact path='/'
                     render={() =>
-                        startAuth ? <Redirect to="/login" />
+                        <Home />
+                    }
+                />
+                {/* <Route
+                    exact path='/'
+                    render={() =>
+                        showAuth ? <Redirect to="/login" />
                             : <Home />
                     }
-
-                />
+                /> */}
                 <Route
-                    exact path='/about'
+                    path='/about'
                     render={() => <About />}
                 />
                 <Route
                     path='/profile'
-                    render={(props) => <Profile auth={lock} {...props} />}
+                    render={(props) => <Profile
+                        auth={lock}
+                        login={login}
+                        isAuthenticated={isAuthenticated}
+                        {...props}
+                    />}
                 />
                 {/* <Route path="/callback" render={(props) => {
                     return <Callback {...props} />;
                 }} /> */}
                 <Route
                     path='/login'
-                    render={(props) => <LoginPage auth={lock} {...props} />}
+                    render={(props) =>
+                        <LoginPage auth={lock} {...props} />
+                    }
                 />
+                {/* <div id='tmp-login'></div> */}
             </div>
         );
     }
@@ -100,5 +146,5 @@ const ConnectedRoutes = connect(
     mapStateToProps
 )(Routes);
 
-export default ConnectedRoutes;
+export default Routes;
 

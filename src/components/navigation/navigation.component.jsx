@@ -10,7 +10,7 @@ class Navigation extends React.Component {
             <nav className="tmp-nav tmp-page__nav">
                 <ul className="tmp-nav__links">
                     <li>
-                        <Link to="/home">Home</Link>
+                        <Link to="/">Home</Link>
                     </li>
                     <li>
                         <Link to="/about">About</Link>

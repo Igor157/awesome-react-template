@@ -4,17 +4,16 @@ import LoginPage from '../login-page/login-page.component.jsx';
 
 
 export class Profile extends React.Component {
-    constructor(props) {
-        super(props);
-        this.login = this.login.bind(this);
-    }
-    login() {
-        this.props.auth.login();
+    componentWillMount() {
+        const isAuthenticated = this.props.isAuthenticated();
+        if (!isAuthenticated) {
+            this.props.login();
+        }
     }
     render() {
-        const { isAuthenticated } = this.props.auth;
+        const isAuthenticated = this.props.isAuthenticated();
         return (
-            isAuthenticated() ?
+            isAuthenticated ?
                 <div className='tmp-profile tmp-page__profile' >
                     <h1>Privat information</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.

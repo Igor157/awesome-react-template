@@ -5,11 +5,11 @@ import style from './header.style.css';
 
 class Header extends Component {
     login() {
-        this.props.auth.show();
         this.props.startAuth(this.props.started);
+        this.props.login();
     }
     logout() {
-        this.props.auth.logout();
+        this.props.logout();
     }
     componentDidMount() {
         // const { userProfile, getProfile } = this.props.auth;
@@ -22,16 +22,15 @@ class Header extends Component {
         // }
     }
     render() {
-        const { isAuthenticated } = this.props.auth;
+        const isAuthenticated = this.props.isAuthenticated();
         return (
             <div className='tmp-header tmp-page__header'>
                 <Navigation />
-                {/* {
-                    isAuthenticated() ?
+                {
+                    isAuthenticated ?
                         <button className="tmp-header__log-out" onClick={() => this.logout()}>Log out </button>
                         : <button className="tmp-header__log-in" onClick={() => this.login()}>Log In</button>
-                } */}
-                <button className="tmp-header__log-in" onClick={() => this.login()}>Log In</button>
+                }
             </div >
         );
     }
