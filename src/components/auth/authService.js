@@ -6,8 +6,8 @@ const domain = 'igor-kazakov.eu.auth0.com';
 const options = {
     oidcConformant: true,
     allowShowPassword: true,
-    usernameStyle: 'email'
-    // container: 'tmp-login'
+    usernameStyle: 'email',
+    container: 'tmp-login'
 };
 
 export const lock = new Auth0Lock(cid, domain, options);
@@ -29,7 +29,7 @@ lock.on('authorization_error', function (error) {
 
 export function isAuthenticated() {
     let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-    return new Date().getTime() < expiresAt;
+    return new Date().getTime() <= expiresAt;
 }
 export function logout() {
     localStorage.removeItem('access_token');
@@ -39,6 +39,5 @@ export function logout() {
 }
 
 export function login() {
-    history.replace('/login');
     lock.show();
 }

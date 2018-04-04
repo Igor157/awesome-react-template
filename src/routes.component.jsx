@@ -20,12 +20,11 @@ import {
     login
 } from './components/auth/authService';
 import './normalize.css';
-// let showAuth;
-// lock.on("show", () => {
-//     showAuth = true;
-//     console.log('!!!!!!!!!!!!!!!!!!!!!!!!!');
-// }
-// );
+let showAuth = false;
+lock.on("show", () => {
+    showAuth = !showAuth;
+}
+);
 
 
 function LoadingComponent(props) {
@@ -71,80 +70,86 @@ const Profile = Loadable({
 });
 
 class Routes extends React.Component {
+    constructor(props) {
+        super(props);
+        this.redirectToLogin = this.redirectToLogin.bind(this);
+        this.stopRedirectToLogin = this.stopRedirectToLogin.bind(this);
+        this.state = { redirectToLogin: false, isAuthenticated: isAuthenticated()};
+    }
+    redirectToLogin() {
+        this.setState({
+            redirectToLogin: true
+        });
+    }
+    stopRedirectToLogin() {
+        this.setState({
+            redirectToLogin: false
+        });
+    }
+    componentDidMount() {
+        this.setState({
+            isAuthenticated: isAuthenticated()
+        });
+    }
     render() {
         let startAuth = this.props.startAuth;
+        console.log(this.state.isAuthenticated);
         return (
             <div className="tmp-page">
                 <Switch>
-                    {/* <Route
+                    <Route
                         path='/login'
-                        render={(props) => <Navigation
-                            auth={lock}
-                            isAuthenticated={isAuthenticated}
-                            logout={logout}
-                            {...props}
-                        />}
-                    /> */}
+                        render={(props) =>
+                            <div className="tmp-page">
+                                <Navigation stopRedirectToLogin={this.stopRedirectToLogin} />
+                                <LoginPage login={login} logout={logout} isAuthenticated={isAuthenticated} {...props} />
+                            </div>
+                        }
+                    />
                     <Route
                         path='/'
-                        render={(props) => <ConnectedHeader
-                            auth={lock}
-                            isAuthenticated={isAuthenticated}
-                            login={login}
-                            logout={logout}
-                            {...props}
-                        />}
+                        render={(props) =>
+                            <div className="tmp-page">
+                                <Switch>
+                                    <Route
+                                        path='/'
+                                        render={(props) => <ConnectedHeader
+                                            isAuthenticated={isAuthenticated}
+                                            login={login}
+                                            logout={logout}
+                                            redirectToLogin={this.redirectToLogin}
+                                            stopRedirectToLogin={this.stopRedirectToLogin}
+                                            {...props}
+                                        />}
+                                    />
+                                </Switch>
+                                <Route
+                                    exact path='/'
+                                    render={() => this.state.redirectToLogin ? <Redirect to="/login" />
+                                        :
+                                        <Home />
+                                    }
+                                />
+                                <Route
+                                    path='/about'
+                                    render={() => <About />}
+                                />
+                                <Route
+                                    path='/profile'
+                                    render={(props) => !this.state.redirectToLogin ?
+                                        <Profile redirectToLogin={this.redirectToLogin} isAuthenticated={isAuthenticated} />
+                                        : <Redirect to="/login" />
+                                    }
+                                />
+                            </div>
+                        }
                     />
                 </Switch>
-                <Route
-                    exact path='/'
-                    render={() =>
-                        <Home />
-                    }
-                />
-                {/* <Route
-                    exact path='/'
-                    render={() =>
-                        showAuth ? <Redirect to="/login" />
-                            : <Home />
-                    }
-                /> */}
-                <Route
-                    path='/about'
-                    render={() => <About />}
-                />
-                <Route
-                    path='/profile'
-                    render={(props) => <Profile
-                        auth={lock}
-                        login={login}
-                        isAuthenticated={isAuthenticated}
-                        {...props}
-                    />}
-                />
-                {/* <Route path="/callback" render={(props) => {
-                    return <Callback {...props} />;
-                }} /> */}
-                <Route
-                    path='/login'
-                    render={(props) =>
-                        <LoginPage auth={lock} {...props} />
-                    }
-                />
-                {/* <div id='tmp-login'></div> */}
             </div>
+
         );
     }
 }
-
-const mapStateToProps = (state) => {
-    return {
-        startAuth: state.headerReducer.startAuth
-    };
-};
-const ConnectedRoutes = connect(
-    mapStateToProps
-)(Routes);
 
 export default Routes;
 

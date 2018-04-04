@@ -5,27 +5,17 @@ import style from './header.style.css';
 
 class Header extends Component {
     login() {
+        this.props.redirectToLogin();
         this.props.startAuth(this.props.started);
-        this.props.login();
     }
     logout() {
         this.props.logout();
-    }
-    componentDidMount() {
-        // const { userProfile, getProfile } = this.props.auth;
-        // if (!userProfile) {
-        //     getProfile((err, profile) => {
-        //         this.props.getUserInfo(profile);
-        //     });
-        // } else {
-        //     this.props.getUserInfo(userProfile);
-        // }
     }
     render() {
         const isAuthenticated = this.props.isAuthenticated();
         return (
             <div className='tmp-header tmp-page__header'>
-                <Navigation />
+                <Navigation stopRedirectToLogin={this.props.stopRedirectToLogin} />
                 {
                     isAuthenticated ?
                         <button className="tmp-header__log-out" onClick={() => this.logout()}>Log out </button>
