@@ -19,7 +19,7 @@ lock.on('authenticated', function (authResult) {
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
     lock.getUserInfo(authResult.accessToken, function (error, profile) {
-        console.log(error, profile);
+        localStorage.setItem('profile', JSON.stringify(profile));
     });
 });
 
@@ -40,4 +40,17 @@ export function logout() {
 
 export function login() {
     lock.show();
+}
+export function getUserInfo() {
+    console.log(localStorage.getItem('access_token'));
+    let info;
+    if (localStorage.getItem('access_token')) {
+        lock.getUserInfo(localStorage.getItem('access_token'), function (error, profile) {
+            if (!error) {
+                info=profile;
+            }
+        });
+    }
+    console.log(info, 'info');
+    return info;
 }

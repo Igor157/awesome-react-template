@@ -20,11 +20,7 @@ import {
     login
 } from './components/auth/authService';
 import './normalize.css';
-let showAuth = false;
-lock.on("show", () => {
-    showAuth = !showAuth;
-}
-);
+let userInfo = JSON.parse(localStorage.getItem('profile'));
 
 
 function LoadingComponent(props) {
@@ -74,7 +70,7 @@ class Routes extends React.Component {
         super(props);
         this.redirectToLogin = this.redirectToLogin.bind(this);
         this.stopRedirectToLogin = this.stopRedirectToLogin.bind(this);
-        this.state = { redirectToLogin: false, isAuthenticated: isAuthenticated()};
+        this.state = { redirectToLogin: false, isAuthenticated: isAuthenticated() };
     }
     redirectToLogin() {
         this.setState({
@@ -92,6 +88,14 @@ class Routes extends React.Component {
         });
     }
     render() {
+        console.log(localStorage.getItem('access_token'), '!!!!!!');
+        if (localStorage.getItem('access_token')) {
+            lock.getUserInfo(localStorage.getItem('access_token'), function (error, profile) {
+                if (!error) {
+                    console.log(profile);
+                }
+            });
+        }
         let startAuth = this.props.startAuth;
         console.log(this.state.isAuthenticated);
         return (
@@ -132,12 +136,16 @@ class Routes extends React.Component {
                                 />
                                 <Route
                                     path='/about'
-                                    render={() => <About />}
+                                    render={() => this.state.redirectToLogin ? <Redirect to="/login" />
+                                        : <About />}
                                 />
                                 <Route
                                     path='/profile'
                                     render={(props) => !this.state.redirectToLogin ?
-                                        <Profile redirectToLogin={this.redirectToLogin} isAuthenticated={isAuthenticated} />
+                                        <Profile
+                                            redirectToLogin={this.redirectToLogin}
+                                            isAuthenticated={isAuthenticated}
+                                        />
                                         : <Redirect to="/login" />
                                     }
                                 />
